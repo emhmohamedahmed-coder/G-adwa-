@@ -161,7 +161,7 @@ input[type=range]{width:100%;accent-color:var(--amber);height:26px}
 @media print{.exb,.goal{color:#111}}
 </style>
 </head>
-<body><a href="/tools.html" style="position:fixed;bottom:8px;left:8px;z-index:99999;background:#0a3f61;color:#fff;padding:4px 12px;border-radius:999px;font:13px Tahoma,sans-serif;text-decoration:none;opacity:.85">← جدوتي</a>
+<body><a href="/tools.html" style="position:fixed;bottom:8px;left:8px;z-index:99999;background:#0a3f61;color:#fff;padding:4px 12px;border-radius:999px;font:13px Tahoma,sans-serif;text-decoration:none;opacity:.85">← G-Adwa</a>
 <div class="wrap">
  <div class="top"><div class="brand">G-Adwa<small id="sub"></small></div>
   <div class="tb"><button class="ghost" id="soundBtn" aria-label="sound">🔇</button><button class="ghost" id="helpBtn"></button><button class="ghost" id="homeBtn" hidden></button><button class="ghost" id="langBtn"></button></div></div>
@@ -1604,8 +1604,7 @@ function renderResults(){
    <div class="stack"><div class="card"><h3>${S('لماذا اختلفت النتيجة عن الخطة؟','Why did the result differ?')}</h3><div class="why">${why.map(w=>`<div>${w}</div>`).join('')}</div></div>
    <div class="card"><h3>${S('سجل القرارات','Decision log')}</h3><div class="logs">${logHTML(G.log)}</div></div></div></div>
   ${bestBlock()}${achBlock()}
-  <div class="btns"><button class="cta" id="rPrint">${S('طباعة / حفظ PDF','Print / save PDF')}</button><button class="cta" id="rX" style="background:#fff;color:#111">${S('شارك على X','Share on X')}</button><button class="cta sec" id="rSame">${S('أعد نفس الأحداث','Run the same events again')}</button><button class="cta sec" id="rNew">${S('سيناريو جديد','New scenario')}</button><button class="cta sec" id="rCfg">${S('غيّر الاستراتيجية','Change strategy')}</button>
-   <a class="cta sec" href="https://payhip.com/Gadwaty" target="_blank" rel="noopener">${S('اطلب دراسة جدوى لمشروعك الحقيقي','Order a real feasibility study')}</a></div>
+  <div class="btns"><button class="cta" id="rPrint">${S('طباعة / حفظ PDF','Print / save PDF')}</button><button class="cta" id="rX" style="background:#fff;color:#111">${S('شارك على X','Share on X')}</button><button class="cta sec" id="rSame">${S('أعد نفس الأحداث','Run the same events again')}</button><button class="cta sec" id="rNew">${S('سيناريو جديد','New scenario')}</button><button class="cta sec" id="rCfg">${S('غيّر الاستراتيجية','Change strategy')}</button></div>
   <p class="disc">${S('المحاكاة تستخدم أرقامًا تقديرية وأحداثًا عشوائية مقيدة بقواعد المشروع. لا تعتمد عليها وحدها في قرار استثماري حقيقي.','The simulation uses estimated numbers and random events bound by project rules. Do not rely on it alone for a real investment decision.')}</p>${storeLine()}`;
   updScene(s,G.run);
   $('rPrint').addEventListener('click',printReport);$('rX').addEventListener('click',shareX);
@@ -1616,8 +1615,7 @@ const GA_ID='G-TLN49T4HP6';
 (function(){if(!GA_ID)return;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);document.head.appendChild(s);gtag('js',new Date());gtag('config',GA_ID)})();
 function track(n,p){try{if(window.gtag)gtag('event',n,p||{})}catch(e){}}
 /* ---------- extras: storage, lead gate, share, badges, sound, tour ---------- */
-const STORE_URL='https://payhip.com/Gadwaty';
-const storeLine=()=>`<p class="disc store">${S('لشراء دراسات جدوى كاملة وموثوقة، قم بزيارة متجرنا:','For complete, trustworthy feasibility studies, visit our store:')} <a href="${STORE_URL}" target="_blank" rel="noopener" onclick="track('store_click')">${S('متجر جدوتي على Payhip','GADWATY store on Payhip')}</a></p>`;
+const storeLine=()=>'';
 const SITE_URL='https://www.g-adwa.com';
 const LEAD_URL='';/* ضع هنا رابط استقبال البريد (Google Apps Script أو Formspree) ليصلك بريد كل زائر */
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
@@ -1694,14 +1692,13 @@ const dots=st=>`<span class="dots">${[1,2,3,4,5,6].map(i=>`<i class="${i<=st?'on
 /* printing behind an email gate */
 function printHead(){const pr=PR(G.run);return `<div class="printhead"><b style="font-size:1.3rem">G-Adwa — ${S('تقرير محاكاة استثمار','Investment simulation report')}</b><div>${P2(pr.name)} • ${P2((pr.scns[G.run.scenario]||pr.scns.base).name)} • ${new Date().toLocaleDateString(LANG==='ar'?'ar-SA':'en-GB')}</div><div class="note">${SITE_URL}</div></div>`}
 function doPrint(){try{window.print()}catch(e){}}
-function printReport(){track('print_report');if(LS.get('gadwa_email'))doPrint();else askEmail()}
+function printReport(){track('print_report');doPrint()}
 function askEmail(){
   openBox(`<div class="mbox"><h2>${S('احصل على تقرير النتائج PDF','Get your results report as PDF')}</h2>
   <p>${S('أدخل بريدك الإلكتروني ثم اطبع التقرير أو احفظه PDF من نافذة الطباعة (اختر «حفظ كـ PDF»).','Enter your email, then print the report or save it as PDF from the print dialog (choose “Save as PDF”).')}</p>
   <input id="leadEmail" class="num" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" style="margin-bottom:6px;font-size:1rem;padding:8px 10px">
   <div id="leadErr" class="note" style="color:var(--coral);min-height:1.3em"></div>
-  <div class="btns" style="margin-top:6px"><button class="cta" id="leadGo">${S('تابع وافتح التقرير','Continue to the report')}</button><button class="cta sec" id="leadNo">${S('إلغاء','Cancel')}</button></div>
-  <p class="note" style="margin-top:10px">${S('بإدخال بريدك توافق على أن تتواصل معك جدوتي بخصوص خدماتها.','By entering your email you agree that GADWATY may contact you about its services.')}</p></div>`);
+  <div class="btns" style="margin-top:6px"><button class="cta" id="leadGo">${S('تابع وافتح التقرير','Continue to the report')}</button><button class="cta sec" id="leadNo">${S('إلغاء','Cancel')}</button></div></div>`);
   $('leadGo').addEventListener('click',submitEmail);$('leadNo').addEventListener('click',closeBox);
   $('leadEmail').addEventListener('keydown',e=>{if(e.key==='Enter')submitEmail()});setTimeout(()=>{const i=$('leadEmail');if(i)i.focus()},50);
 }
@@ -1719,7 +1716,7 @@ function sendLead(email){
 /* share on X */
 function shareX(){
   track('share_x');const pr=PR(G.run),a=R.act;
-  const txt=S(`جرّبت إطلاق ${P2(pr.name)} في محاكي G-Adwa: ${R.verdict} | العائد IRR ${a.irr==null?'—':(a.irr*100).toFixed(1)+'%'} | NPV ${mt(a.npv)}\nجرّب مشروعك قبل ما تدفع فلوسك الحقيقية 👇\n#GAdwa #جدوتي`,`I launched a ${P2(pr.name)} in the G-Adwa simulator: ${R.verdict} | IRR ${a.irr==null?'—':(a.irr*100).toFixed(1)+'%'} | NPV ${mt(a.npv)}\nTest your venture before risking real money 👇\n#GAdwa`);
+  const txt=S(`جرّبت إطلاق ${P2(pr.name)} في محاكي G-Adwa: ${R.verdict} | العائد IRR ${a.irr==null?'—':(a.irr*100).toFixed(1)+'%'} | NPV ${mt(a.npv)}\nجرّب مشروعك قبل ما تدفع فلوسك الحقيقية 👇\n#GAdwa`,`I launched a ${P2(pr.name)} in the G-Adwa simulator: ${R.verdict} | IRR ${a.irr==null?'—':(a.irr*100).toFixed(1)+'%'} | NPV ${mt(a.npv)}\nTest your venture before risking real money 👇\n#GAdwa`);
   window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(SITE_URL),'_blank','noopener');
 }
 
@@ -1827,7 +1824,7 @@ function dailyChallenge(){
 function shareX(){
   track('share_x');const pr=PR(G.run),a=R.act,st=(R.goals||[]).filter(x=>x.st==='ok').length,rt=ratingOf(G.s.cr),irr=a.irr==null?'—':(a.irr*100).toFixed(1)+'%';
   const stars='⭐'.repeat(st)+'☆'.repeat(3-st);
-  const txt=S(`${G.daily?'📅 تحدي اليوم: ':''}جرّبت إطلاق ${P2(pr.name)} في محاكي G-Adwa: ${R.verdict}\nIRR ${irr} | NPV ${mt(a.npv)} | تقييم ائتماني ${rt} | ${stars}\nجرّب مشروعك قبل ما تدفع فلوسك الحقيقية 👇 #GAdwa #جدوتي`,`${G.daily?'📅 Daily challenge: ':''}I launched a ${P2(pr.name)} in the G-Adwa simulator: ${R.verdict}\nIRR ${irr} | NPV ${mt(a.npv)} | credit ${rt} | ${stars}\nTest your venture before risking real money 👇 #GAdwa`);
+  const txt=S(`${G.daily?'📅 تحدي اليوم: ':''}جرّبت إطلاق ${P2(pr.name)} في محاكي G-Adwa: ${R.verdict}\nIRR ${irr} | NPV ${mt(a.npv)} | تقييم ائتماني ${rt} | ${stars}\nجرّب مشروعك قبل ما تدفع فلوسك الحقيقية 👇 #GAdwa`,`${G.daily?'📅 Daily challenge: ':''}I launched a ${P2(pr.name)} in the G-Adwa simulator: ${R.verdict}\nIRR ${irr} | NPV ${mt(a.npv)} | credit ${rt} | ${stars}\nTest your venture before risking real money 👇 #GAdwa`);
   window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(SITE_URL),'_blank','noopener');
 }
 
