@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2074050673048532" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>السيناريوهات وتحليل الحساسية: أيهما تستخدم ومتى؟ | جدوى المحاكاة</title>
+<meta name="description" content="الفرق بين تحليل السيناريوهات وتحليل الحساسية وكيف يكمل كلٌّ منهما الآخر في اختبار القرارات.">
+<link rel="canonical" href="https://www.g-adwa.com/guides/scenario-and-sensitivity-analysis.html">
+<meta property="og:title" content="السيناريوهات وتحليل الحساسية: أيهما تستخدم ومتى؟"><meta property="og:description" content="الفرق بين تحليل السيناريوهات وتحليل الحساسية وكيف يكمل كلٌّ منهما الآخر في اختبار القرارات."><meta property="og:type" content="article"><meta property="og:url" content="https://www.g-adwa.com/guides/scenario-and-sensitivity-analysis.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "السيناريوهات وتحليل الحساسية: أيهما تستخدم ومتى؟", "description": "الفرق بين تحليل السيناريوهات وتحليل الحساسية وكيف يكمل كلٌّ منهما الآخر في اختبار القرارات.", "inLanguage": "ar", "datePublished": "2026-11-20", "dateModified": "2026-11-20", "mainEntityOfPage": "https://www.g-adwa.com/guides/scenario-and-sensitivity-analysis.html", "author": {"@type": "Organization", "name": "جدوى المحاكاة"}, "publisher": {"@type": "Organization", "name": "جدوى المحاكاة (G-Adwa)"}}</script>
+</head>
+<body>
+<header class="site"><div class="w"><a class="brand" href="/">جدوى المحاكاة <small>G-Adwa</small></a><nav><a href="/">الرئيسية</a><a href="/tools.html">الأدوات والمحاكيات</a><a href="/guides/">المقالات</a><a href="/request.html">اطلب محاكاة</a><a href="/about.html">من نحن</a><a href="/contact.html">اتصل بنا</a></nav></div></header>
+<main class="w">
+<article><p class="meta"><a href="/">الرئيسية</a> › <a href="/guides/">المقالات</a></p><h1>السيناريوهات وتحليل الحساسية: أيهما تستخدم ومتى؟</h1>
+<p>كلا الأسلوبين يجيب عن سؤال «ماذا لو؟»، لكن بطريقتين مختلفتين. فهم الفرق يساعدك على اختيار الأنسب لقرارك.</p>
+<h2>تحليل الحساسية</h2>
+<p>تغيّر متغيرًا واحدًا في كل مرة، مع تثبيت الباقي، لترى مدى تأثيره على النتيجة. مثال: ماذا لو ارتفع سعر المادة الخام 10%؟ ماذا لو انخفضت المبيعات 15%؟ ناتج التحليل ترتيب للمتغيرات من الأكثر تأثيرًا إلى الأقل، فتعرف أين تركّز اهتمامك.</p>
+<h2>تحليل السيناريوهات</h2>
+<p>تغيّر عدة متغيرات معًا لتصف عالمًا متماسكًا، مثل: سيناريو متفائل (طلب مرتفع وأسعار مواد ثابتة)، وأساسي، ومتشائم (طلب ضعيف وتكلفة مرتفعة وتأخر في التنفيذ). هنا ترى كيف تتصرف خطتك في ظروف مختلفة تمامًا.</p>
+<table><tr><th>الجانب</th><th>الحساسية</th><th>السيناريوهات</th></tr>
+<tr><td>التغيير</td><td>متغير واحد</td><td>عدة متغيرات معًا</td></tr>
+<tr><td>السؤال</td><td>أي متغير أهم؟</td><td>ماذا لو تغيّرت الظروف كلها؟</td></tr>
+<tr><td>الناتج</td><td>ترتيب بالتأثير</td><td>صور متكاملة للمستقبل</td></tr></table>
+<h2>كيف نجمع بينهما؟</h2>
+<p>ابدأ بالحساسية لتعرف المتغيرات الحرجة، ثم ابنِ سيناريوهات تتغير فيها تلك المتغيرات الحرجة معًا. وبعدها اسأل: ما الذي أستطيع فعله لو تحقق السيناريو المتشائم؟ الخطة الجيدة تحتوي على إجراءات جاهزة لكل سيناريو.</p>
+<div class="note">جرّب ذلك عمليًا في <a href="/g-adwa-sim.html">محاكي الاستثمار</a>: أعد المشروع نفسه مع أحداث سوق مختلفة وقارن النتائج.</div>
+
+<h2>مثال مشترك: متجر إلكتروني</h2>
+<p><strong>الحساسية:</strong> نغيّر كل متغير على حدة بنسبة 10%. تكلفة الشحن +10% تخفض الربح 3%. معدل التحويل −10% يخفضه 12%. سعر البيع −10% يخفضه 18%. الاستنتاج: الربح أكثر حساسية للسعر ثم معدل التحويل، وأقل للشحن. الأرقام هنا مثال توضيحي.</p>
+<p><strong>السيناريوهات:</strong> نبني ثلاث صور. متفائل: حملة ناجحة ورفع المبيعات. أساسي: النمو المعتاد. متشائم: دخول منافس قوي ينزل بالسعر ويرفع تكلفة جذب العميل. نرى لكل سيناريو الربح والسيولة، ونحدد ما نفعله في كل حالة.</p>
+<h2>خطوات عملية لتحليل جيد</h2>
+<ol>
+<li>اكتب الافتراضات الرئيسية في مكان واحد واضح.</li>
+<li>حدد المتغيرات الأكثر تأثيرًا بتحليل الحساسية.</li>
+<li>ابنِ ثلاثة سيناريوهات متماسكة، وأعطها أسماء توضح قصتها.</li>
+<li>لكل سيناريو حدد ما تفعله مسبقًا (خطة استجابة).</li>
+<li>راجع الافتراضات دوريًا وحدّث التحليل.</li>
+</ol>
+<h2>أخطاء شائعة</h2>
+<ul>
+<li>بناء السيناريو المتشائم بشكل خفيف جدًا ليبدو مطمئنًا.</li>
+<li>تغيير متغيرات مرتبطة كأنها مستقلة في الحساسية.</li>
+<li>التوقف عند الأرقام دون وضع خطة استجابة.</li>
+</ul>
+<h2>أسئلة شائعة</h2>
+<h3>كم سيناريو يكفي؟</h3>
+<p>ثلاثة كافية غالبًا. الكثرة قد تشتت دون فائدة.</p>
+<h3>هل أحتاج برنامجًا متخصصًا؟</h3>
+<p>ليس بالضرورة؛ جدول بيانات بسيط أو محاكاة تفاعلية تكفي للبداية.</p>
+</article>
+</main>
+<footer class="site"><div class="w">
+<p><strong>جدوى المحاكاة</strong> (G-Adwa) — منصة عربية مستقلة للمحاكاة التفاعلية بكل أنواعها في جميع القطاعات والمجالات: جرّب الأفكار والقرارات والعمليات قبل أن تخوضها في الواقع.</p>
+<p><a href="/about.html">من نحن</a> · <a href="/guides/">المقالات</a> · <a href="/tools.html">الأدوات</a> · <a href="/request.html">اطلب محاكاة</a> · <a href="/privacy.html">سياسة الخصوصية</a> · <a href="/terms.html">شروط الاستخدام</a> · <a href="/contact.html">اتصل بنا</a></p>
+<p class="small">المحتوى للأغراض التعليمية والمعلوماتية ولا يُعدّ استشارة مالية أو قانونية أو ضمانًا لنتائج استثمارية. © 2026 جدوى المحاكاة.</p>
+</div></footer>
+</body>
+</html>
