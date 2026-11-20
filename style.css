@@ -1,6 +1,6 @@
 :root{--bg:#f6f8fa;--card:#fff;--ink:#17222b;--mute:#5a6b78;--line:#dde4ea;--brand:#0e5a8a;--brand2:#0a3f61;--amber:#f4b23e}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,"Segoe UI",system-ui,sans-serif;line-height:1.9;font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,"Noto Naskh Arabic",Tahoma,"Segoe UI",sans-serif;line-height:1.9;font-size:17px;letter-spacing:0;word-spacing:0;text-rendering:optimizeLegibility}
 .w{max-width:960px;margin:0 auto;padding:0 16px}
 header.site{background:var(--brand2);color:#fff}
 header.site .w{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;padding-top:10px;padding-bottom:10px}
