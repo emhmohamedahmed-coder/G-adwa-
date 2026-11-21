@@ -305,10 +305,11 @@ button{font-family:inherit;color:inherit}
     <linearGradient id="gBrass" x1="0" x2="1"><stop offset="0" stop-color="#6a4a12"/><stop offset=".3" stop-color="#d9b25a"/><stop offset=".5" stop-color="#fff0b8"/><stop offset=".7" stop-color="#c99a3a"/><stop offset="1" stop-color="#5a3c0c"/></linearGradient>
     <linearGradient id="gSteel" x1="0" x2="1"><stop offset="0" stop-color="#5d646c"/><stop offset=".35" stop-color="#c9d0d6"/><stop offset=".5" stop-color="#f4f7f9"/><stop offset=".7" stop-color="#a8b0b8"/><stop offset="1" stop-color="#4c535a"/></linearGradient>
     <linearGradient id="gGlass" x1="0" x2="1"><stop offset="0" stop-color="#0f4b50" stop-opacity=".75"/><stop offset=".22" stop-color="#5fb3b8" stop-opacity=".35"/><stop offset=".35" stop-color="#e8fbfc" stop-opacity=".6"/><stop offset=".48" stop-color="#7cc7cc" stop-opacity=".25"/><stop offset=".85" stop-color="#2d8088" stop-opacity=".45"/><stop offset="1" stop-color="#0c3d42" stop-opacity=".8"/></linearGradient>
-    <filter id="fGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.18"/><feComposite in2="SourceGraphic" operator="in"/></filter>
-    <filter id="fTob" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".22" numOctaves="3" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 -.25"/><feComposite in2="SourceGraphic" operator="in"/></filter>
-    <filter id="fCrinkle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="4" seed="7" result="n"/><feDiffuseLighting in="n" surfaceScale="3.2" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="50"/></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="in"/></filter>
-    <filter id="fSoft"><feGaussianBlur stdDeviation="3"/></filter>
+    <pattern id="pGrain" patternUnits="userSpaceOnUse" width="64" height="64"><image id="imGrain" width="64" height="64"/></pattern>
+    <pattern id="pTob" patternUnits="userSpaceOnUse" width="96" height="96"><image id="imTob" width="96" height="96"/></pattern>
+    <pattern id="pCrinkle" patternUnits="userSpaceOnUse" x="17" y="17" width="186" height="186"><image id="imCrinkle" width="186" height="186"/></pattern>
+    <radialGradient id="gShadow"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".7" stop-color="#000" stop-opacity=".25"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gShine"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
   </defs>
 </svg>
 
@@ -2364,6 +2365,28 @@ const pick = a => a[Math.floor(Math.random() * a.length)];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
 const SVGNS = 'http://www.w3.org/2000/svg';
+/* textures for the prep art, drawn once (live SVG filters are too heavy for phones) */
+(function makeTextures() {
+  try {
+    const mk = (n, fn) => { const c = document.createElement('canvas'); c.width = c.height = n; const x = c.getContext('2d'), im = x.createImageData(n, n); fn(im.data, n); x.putImageData(im, 0, 0); return c.toDataURL('image/png'); };
+    const noise = (n, cell, seed) => {   // tileable value noise
+      const G = n / cell, r = []; let s = seed; for (let i = 0; i < G * G; i++) { s = (s * 16807) % 2147483647; r.push(s / 2147483647); }
+      const at = (i, j) => r[((j + G) % G) * G + ((i + G) % G)], sm = t => t * t * (3 - 2 * t);
+      return (x, y) => { const fx = x / cell, fy = y / cell, i = Math.floor(fx), j = Math.floor(fy), u = sm(fx - i), v = sm(fy - j);
+        return (at(i, j) * (1 - u) + at(i + 1, j) * u) * (1 - v) + (at(i, j + 1) * (1 - u) + at(i + 1, j + 1) * u) * v; };
+    };
+    const grain = mk(64, (d, n) => { for (let i = 0; i < n * n; i++) { const v = Math.random(); d[i * 4 + 3] = v < 0.5 ? (0.5 - v) * 140 : 0; } });
+    const nT = noise(96, 6, 7), nT2 = noise(96, 3, 11);
+    const tob = mk(96, (d, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) { const v = nT(x, y) * 0.6 + nT2(x, y) * 0.4, k = (y * n + x) * 4; d[k] = d[k + 1] = d[k + 2] = 0; d[k + 3] = Math.max(0, (0.62 - v)) * 330; } });
+    const n1 = noise(186, 31, 3), n2 = noise(186, 15.5, 5), n3 = noise(186, 6.2, 9);
+    const h = (x, y) => n1(x, y) * 0.55 + n2(x, y) * 0.3 + n3(x, y) * 0.15;
+    const crk = mk(186, (d, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      const dx = (h(x + 1, y) - h(x - 1, y)) * 9, dy = (h(x, y + 1) - h(x, y - 1)) * 9, l = (-dx * 0.6 - dy * 0.55 + 0.6) / Math.sqrt(dx * dx + dy * dy + 1);
+      const k = (y * n + x) * 4, sh = l < 0.55 ? 0 : 255; d[k] = d[k + 1] = d[k + 2] = sh; d[k + 3] = Math.min(255, Math.abs(l - 0.55) * 420); } });
+    const set = (id, u) => { const e = document.getElementById(id); if (e) { e.setAttribute('href', u); e.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', u); } };
+    set('imGrain', grain); set('imTob', tob); set('imCrinkle', crk);
+  } catch (e) {}
+})();
 
 const seatsEl = $('#seats'), stageEl = $('#stage'), stepsEl = $('#steps'), orderBar = $('#orderBar'), toastEl = $('#toast');
 const moneyEl = $('#money'), timeEl = $('#time'), timeBar = $('#timeBar i'), angryEl = $('#angry');
@@ -2950,7 +2973,7 @@ function shishaSVG(coals, smoke) {
   return '<svg viewBox="0 0 140 280" class="shisha" aria-hidden="true">' +
     '<defs><clipPath id="bc' + id + '"><path d="' + BASE + '"/></clipPath></defs>' +
     sm +
-    '<ellipse cx="70" cy="272" rx="46" ry="6" fill="#000" opacity=".35" filter="url(#fSoft)"/>' +
+    '<ellipse cx="70" cy="272" rx="50" ry="7" fill="url(#gShadow)"/>' +
     // hose
     '<path d="M82 184 C138 182 142 228 116 250" fill="none" stroke="#3a0a10" stroke-width="9" stroke-linecap="round"/>' +
     '<path d="M82 184 C138 182 142 228 116 250" fill="none" stroke="#a52a3a" stroke-width="6.5" stroke-linecap="round"/>' +
@@ -2969,7 +2992,7 @@ function shishaSVG(coals, smoke) {
     '<ellipse cx="70" cy="82" rx="46" ry="9" fill="url(#gSteel)" stroke="#4c535a" stroke-width="1.2"/><ellipse cx="70" cy="80" rx="40" ry="6" fill="rgba(255,255,255,.22)"/>' +
     // clay bowl with foil
     '<path d="M46 44 Q70 37 94 44 L87 78 Q70 83 53 78Z" fill="url(#gClayS)" stroke="#3a1606" stroke-width="1.6"/>' +
-    '<path d="M46 44 Q70 37 94 44 L87 78 Q70 83 53 78Z" fill="#000" filter="url(#fGrain)" opacity=".5"/>' +
+    '<path d="M46 44 Q70 37 94 44 L87 78 Q70 83 53 78Z" fill="url(#pGrain)" opacity=".5"/>' +
     '<ellipse cx="70" cy="43" rx="25" ry="6.5" fill="url(#gFoilR)" stroke="#7b838c" stroke-width="1.2"/>' + cl +
     '</svg>';
 }
@@ -2987,14 +3010,14 @@ function sideSVG(color) {
     '<rect x="96" y="196" width="28" height="24" rx="4" fill="url(#gClayS)"/>' +
     // bowl wall (outer), with grain
     '<path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z" fill="url(#gClayS)" stroke="#3a1606" stroke-width="2"/>' +
-    '<path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z" fill="#000" filter="url(#fGrain)" opacity=".55"/>' +
+    '<path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z" fill="url(#pGrain)" opacity=".55"/>' +
     // cut face of the wall (lighter terracotta)
     '<path d="M38 50 L52 58 L70 184 Q110 195 150 184 L168 58 L182 50 L162 192 Q110 208 58 192 Z" fill="url(#gClayCut)" opacity=".55"/>' +
     // interior + bottom holes
     '<path d="M52 58 L168 58 L150 184 Q110 195 70 184 Z" fill="#170a05"/>' +
     '<g clip-path="url(#bowlClip)">' +
       '<rect id="packRect" x="40" y="200" width="140" height="0" fill="' + color + '"/>' +
-      '<rect x="40" y="40" width="140" height="160" fill="#000" filter="url(#fTob)" opacity=".7" style="pointer-events:none"/>' +
+      '<rect x="40" y="40" width="140" height="160" fill="url(#pTob)" opacity=".7" style="pointer-events:none"/>' +
       '<ellipse id="packTop" cx="110" cy="200" rx="60" ry="6" fill="' + color + '" style="filter:brightness(1.3)"/>' +
       '<rect x="40" y="71.2" width="140" height="21.1" fill="rgba(95,208,122,.24)" stroke="#5fd07a" stroke-width="2" stroke-dasharray="6 4"/>' +
     '</g>' +
@@ -3032,14 +3055,14 @@ function topSVG(showTargets) {
   let edge = '';
   for (let i = 0; i < 40; i++) { const a = i / 40 * Math.PI * 2, r = 96 + ((i * 37) % 7); edge += (i ? 'L' : 'M') + (110 + Math.cos(a) * r).toFixed(1) + ' ' + (110 + Math.sin(a) * r).toFixed(1); }
   return '<svg viewBox="0 0 220 220" class="topSvg" aria-hidden="true">' +
-    '<circle cx="112" cy="116" r="106" fill="#000" opacity=".35" filter="url(#fSoft)"/>' +
+    '<circle cx="112" cy="118" r="112" fill="url(#gShadow)"/>' +
     '<circle cx="110" cy="110" r="107" fill="url(#gClayT)" stroke="#3a1606" stroke-width="3"/>' +
-    '<circle cx="110" cy="110" r="107" fill="#000" filter="url(#fGrain)" opacity=".5"/>' +
+    '<circle cx="110" cy="110" r="107" fill="url(#pGrain)" opacity=".5"/>' +
     '<path d="M30 70 A88 88 0 0 1 120 14" stroke="rgba(255,236,210,.45)" stroke-width="4" fill="none" stroke-linecap="round"/>' +
     '<path d="' + edge + 'Z" fill="#b9c0c7" stroke="#7d868f" stroke-width="1.2"/>' +
     '<circle cx="110" cy="110" r="93" fill="url(#gFoilR)"/>' +
-    '<circle cx="110" cy="110" r="93" fill="#fff" filter="url(#fCrinkle)" style="mix-blend-mode:multiply" opacity=".75"/>' +
-    '<ellipse cx="82" cy="78" rx="34" ry="20" fill="rgba(255,255,255,.45)" transform="rotate(-30 82 78)" filter="url(#fSoft)"/>' +
+    '<circle cx="110" cy="110" r="93" fill="url(#pCrinkle)" opacity=".8"/>' +
+    '<ellipse cx="82" cy="78" rx="34" ry="20" fill="url(#gShine)" transform="rotate(-30 82 78)"/>' +
     '<circle cx="110" cy="110" r="93" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="3"/>' +
     slots + '<g id="placed"></g></svg>';
 }
@@ -3469,7 +3492,7 @@ function drawPlaced(state, n, animate) {
   d.setAttribute('fill', 'url(#' + fill + ')'); d.setAttribute('stroke', '#1a0f0a'); d.setAttribute('stroke-width', 2);
   g.appendChild(d);
   const tx = document.createElementNS(SVGNS, 'path');
-  tx.setAttribute('d', lumpPath(pos[0], pos[1], 29, n * 1.7 + 0.4)); tx.setAttribute('fill', '#000'); tx.setAttribute('filter', 'url(#fGrain)'); tx.setAttribute('opacity', state === 'burnt' ? '.35' : '.7');
+  tx.setAttribute('d', lumpPath(pos[0], pos[1], 29, n * 1.7 + 0.4)); tx.setAttribute('fill', 'url(#pGrain)'); tx.setAttribute('opacity', state === 'burnt' ? '.35' : '.7');
   g.appendChild(tx);
   if (state === 'ready') {   // glowing cracks
     const cr = document.createElementNS(SVGNS, 'path');
