@@ -163,14 +163,16 @@ button{font-family:inherit;color:inherit}
   flex:1;min-height:0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:8px 10px;background:rgba(0,0,0,.24);border-radius:16px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.06);
 }
-.hint{margin:6px 8px;text-align:center;font-weight:600;font-size:15.5px;line-height:1.55;color:rgba(246,239,224,.92)}
+.hint{margin:4px 8px;text-align:center;font-weight:600;font-size:15.5px;line-height:1.55;color:rgba(246,239,224,.92)}
 .hint b{color:var(--brass);font-weight:800}
 .hint.big{font-size:17px}
 .idle,.readyView,.holdzone{width:100%;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.idle svg,.readyView svg{flex:1 1 0;min-height:0;max-height:230px;width:100%}
+.idle svg,.readyView svg{flex:1 1 0;min-height:0;max-height:380px;width:100%}
+.sideSvg,.topSvg,.idle svg,.readyView svg{min-height:120px}
 .idle .shisha{opacity:.55}
-.holdzone{touch-action:none;cursor:pointer}
-.sideSvg,.topSvg{flex:1 1 0;min-height:0;width:100%;max-height:250px}
+.holdzone{touch-action:none;cursor:pointer;position:relative}
+.holdzone .pill{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap}
+.sideSvg,.topSvg{flex:1 1 0;min-height:0;width:100%;max-height:380px}
 .pill{
   min-height:34px;padding:5px 14px;border-radius:999px;font-weight:800;font-size:15px;
   background:rgba(0,0,0,.35);color:var(--text);visibility:hidden;
@@ -199,7 +201,7 @@ button{font-family:inherit;color:inherit}
 .jar.picked .glass{filter:brightness(1.25)}
 
 .dot .ring{
-  fill:rgba(255,255,255,.1);stroke:#ffd27a;stroke-width:2.5;stroke-dasharray:5 4;
+  fill:rgba(255,210,122,.16);stroke:#ffd27a;stroke-width:3;stroke-dasharray:6 4;
   transform-box:fill-box;transform-origin:center;animation:ringPulse .8s ease-in-out infinite alternate;
 }
 @keyframes ringPulse{to{transform:scale(1.25)}}
@@ -212,7 +214,7 @@ button{font-family:inherit;color:inherit}
 .tray{flex:none;display:flex;gap:10px;justify-content:center;margin-top:6px}
 .cw{display:flex;flex-direction:column;align-items:center;gap:6px}
 .coal{
-  width:66px;height:66px;border-radius:50%;border:2px solid #0d0806;padding:0;cursor:pointer;
+  width:56px;height:52px;border-radius:42% 58% 46% 54% / 55% 44% 56% 45%;border:2px solid #0d0806;padding:0;cursor:pointer;
   background:radial-gradient(circle at 42% 38%,#4d4744,#1f1b1a 72%);
 }
 .coal[data-s="warm"]{background:radial-gradient(circle at 50% 50%,#d9642a 0%,#7a3a1e 42%,#2a1a14 74%)}
@@ -295,6 +297,18 @@ button{font-family:inherit;color:inherit}
     <radialGradient id="gWarm"><stop offset="0" stop-color="#d9642a"/><stop offset=".45" stop-color="#7a3a1e"/><stop offset="1" stop-color="#2a1a14"/></radialGradient>
     <radialGradient id="gCold"><stop offset="0" stop-color="#4d4744"/><stop offset="1" stop-color="#1f1b1a"/></radialGradient>
     <radialGradient id="gAsh"><stop offset="0" stop-color="#e2ddd5"/><stop offset=".6" stop-color="#a39d95"/><stop offset="1" stop-color="#59534d"/></radialGradient>
+    <radialGradient id="gClayT" cx=".38" cy=".3" r=".75"><stop offset="0" stop-color="#e3a070"/><stop offset=".4" stop-color="#bf6834"/><stop offset=".78" stop-color="#83401a"/><stop offset="1" stop-color="#4f230c"/></radialGradient>
+    <linearGradient id="gClayS" x1="0" x2="1"><stop offset="0" stop-color="#5e2a10"/><stop offset=".18" stop-color="#a5552a"/><stop offset=".42" stop-color="#d98d5b"/><stop offset=".6" stop-color="#b3602f"/><stop offset="1" stop-color="#4a200b"/></linearGradient>
+    <linearGradient id="gClayCut" x1="0" x2="1"><stop offset="0" stop-color="#9a4f28"/><stop offset=".5" stop-color="#c27248"/><stop offset="1" stop-color="#9a4f28"/></linearGradient>
+    <radialGradient id="gFoilR" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#d7dce1"/><stop offset="1" stop-color="#959da6"/></radialGradient>
+    <radialGradient id="gHole"><stop offset="0" stop-color="#2a170c"/><stop offset=".65" stop-color="#3d2312"/><stop offset="1" stop-color="#080503"/></radialGradient>
+    <linearGradient id="gBrass" x1="0" x2="1"><stop offset="0" stop-color="#6a4a12"/><stop offset=".3" stop-color="#d9b25a"/><stop offset=".5" stop-color="#fff0b8"/><stop offset=".7" stop-color="#c99a3a"/><stop offset="1" stop-color="#5a3c0c"/></linearGradient>
+    <linearGradient id="gSteel" x1="0" x2="1"><stop offset="0" stop-color="#5d646c"/><stop offset=".35" stop-color="#c9d0d6"/><stop offset=".5" stop-color="#f4f7f9"/><stop offset=".7" stop-color="#a8b0b8"/><stop offset="1" stop-color="#4c535a"/></linearGradient>
+    <linearGradient id="gGlass" x1="0" x2="1"><stop offset="0" stop-color="#0f4b50" stop-opacity=".75"/><stop offset=".22" stop-color="#5fb3b8" stop-opacity=".35"/><stop offset=".35" stop-color="#e8fbfc" stop-opacity=".6"/><stop offset=".48" stop-color="#7cc7cc" stop-opacity=".25"/><stop offset=".85" stop-color="#2d8088" stop-opacity=".45"/><stop offset="1" stop-color="#0c3d42" stop-opacity=".8"/></linearGradient>
+    <filter id="fGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.18"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+    <filter id="fTob" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".22" numOctaves="3" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 -.25"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+    <filter id="fCrinkle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="4" seed="7" result="n"/><feDiffuseLighting in="n" surfaceScale="3.2" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="50"/></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="in"/></filter>
+    <filter id="fSoft"><feGaussianBlur stdDeviation="3"/></filter>
   </defs>
 </svg>
 
@@ -2370,7 +2384,7 @@ const FLAVORS = [
 ];
 const FL = {}; FLAVORS.forEach(f => { FL[f.id] = f; });
 const COAL_WORD = { 2: 'فحمتين', 3: 'تلات فحمات', 4: 'أربع فحمات' };
-const HOLES = [[110, 110], [110, 66], [154, 110], [110, 154], [66, 110]];
+const HOLES = [[110, 70], [74, 136], [146, 136]];
 const COALPOS = { 2: [[74, 110], [146, 110]], 3: [[110, 72], [76, 142], [144, 142]], 4: [[76, 76], [144, 76], [76, 144], [144, 144]] };
 const STEP_LABELS = ['المعسّل', 'الرص', 'القصدير', 'الفحم', 'التقديم'];
 
@@ -2926,61 +2940,107 @@ function qahwagySVG() {
 
 function shishaSVG(coals, smoke) {
   const id = 's' + (++uidN);
-  const BASE = 'M62 166 L78 166 L80 178 Q114 196 110 232 Q106 268 70 268 Q34 268 30 232 Q26 196 60 178 Z';
+  const BASE = 'M60 166 L80 166 L82 178 Q118 194 114 234 Q110 270 70 270 Q30 270 26 234 Q22 194 58 178 Z';
   const xs = { 0: [], 2: [60, 80], 3: [56, 70, 84], 4: [52, 63, 77, 88] }[coals] || [];
   let cl = '';
-  xs.forEach(x => {
-    cl += '<circle cx="' + x + '" cy="43" r="9" fill="rgba(255,107,44,.35)"/><ellipse cx="' + x + '" cy="43" rx="8" ry="4.5" fill="url(#gReady)"/>';
+  xs.forEach((x, n) => {
+    cl += '<circle cx="' + x + '" cy="41" r="10" fill="rgba(255,107,44,.35)"/><path d="' + lumpPath(x, 41, 7.5, n * 1.3) + '" fill="url(#gReady)" stroke="#1a0f0a" stroke-width=".8"/>';
   });
-  const sm = smoke ? '<g class="smk"><circle cx="66" cy="30" r="9"/><circle cx="76" cy="30" r="8"/><circle cx="70" cy="30" r="10"/></g>' : '';
+  const sm = smoke ? '<g class="smk"><circle cx="66" cy="28" r="9"/><circle cx="76" cy="28" r="8"/><circle cx="70" cy="28" r="10"/></g>' : '';
   return '<svg viewBox="0 0 140 280" class="shisha" aria-hidden="true">' +
-    '<defs><clipPath id="bc' + id + '"><path d="' + BASE + '"/></clipPath>' +
-    '<linearGradient id="gl' + id + '" x1="0" x2="1"><stop offset="0" stop-color="#bfe9ea" stop-opacity=".55"/><stop offset=".5" stop-color="#7fc4c8" stop-opacity=".3"/><stop offset="1" stop-color="#3b8f95" stop-opacity=".55"/></linearGradient></defs>' +
+    '<defs><clipPath id="bc' + id + '"><path d="' + BASE + '"/></clipPath></defs>' +
     sm +
-    '<path d="M80 182 C134 182 140 226 116 248" fill="none" stroke="#6b1622" stroke-width="7" stroke-linecap="round"/>' +
-    '<path d="M80 182 C134 182 140 226 116 248" fill="none" stroke="#c4414f" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 4"/>' +
-    '<rect x="108" y="243" width="14" height="10" rx="3" fill="#d8a437" transform="rotate(30 115 248)"/>' +
-    '<path d="' + BASE + '" fill="#0f3a3d" opacity=".3"/>' +
-    '<g clip-path="url(#bc' + id + ')"><rect x="20" y="214" width="100" height="60" fill="#4fb3bf" opacity=".55"/><ellipse cx="70" cy="214" rx="40" ry="4" fill="#9adbe2" opacity=".7"/><circle cx="58" cy="236" r="3" fill="#dff6f8" opacity=".6"/><circle cx="82" cy="246" r="2.5" fill="#dff6f8" opacity=".6"/></g>' +
-    '<path d="' + BASE + '" fill="url(#gl' + id + ')" stroke="#9fd3d6" stroke-width="2"/>' +
-    '<rect x="64" y="80" width="12" height="90" fill="#c99a3a" stroke="#6a4a12" stroke-width="1.5"/>' +
-    '<ellipse cx="70" cy="108" rx="12" ry="4" fill="#e6bd57" stroke="#6a4a12"/><ellipse cx="70" cy="140" rx="11" ry="3.5" fill="#e6bd57" stroke="#6a4a12"/>' +
-    '<ellipse cx="70" cy="82" rx="44" ry="8" fill="#e0b449" stroke="#6a4a12" stroke-width="1.5"/>' +
-    '<path d="M48 46 Q70 40 92 46 L86 78 Q70 82 54 78Z" fill="url(#gClay)" stroke="#5a2a14" stroke-width="2"/>' +
-    '<ellipse cx="70" cy="45" rx="23" ry="6" fill="#cfd5db" stroke="#7b838c" stroke-width="1.5"/>' + cl +
+    '<ellipse cx="70" cy="272" rx="46" ry="6" fill="#000" opacity=".35" filter="url(#fSoft)"/>' +
+    // hose
+    '<path d="M82 184 C138 182 142 228 116 250" fill="none" stroke="#3a0a10" stroke-width="9" stroke-linecap="round"/>' +
+    '<path d="M82 184 C138 182 142 228 116 250" fill="none" stroke="#a52a3a" stroke-width="6.5" stroke-linecap="round"/>' +
+    '<path d="M82 184 C138 182 142 228 116 250" fill="none" stroke="#e46a78" stroke-width="2" stroke-linecap="round" stroke-dasharray="1.5 3.5" opacity=".8"/>' +
+    '<rect x="108" y="244" width="15" height="11" rx="3" fill="url(#gBrass)" transform="rotate(30 115 249)"/>' +
+    // glass base with water
+    '<g clip-path="url(#bc' + id + ')"><rect x="18" y="212" width="104" height="64" fill="#3fa4ae" opacity=".55"/><ellipse cx="70" cy="212" rx="42" ry="4" fill="#bfeef2" opacity=".75"/>' +
+    '<circle cx="58" cy="236" r="3" fill="#e6fafb" opacity=".7"/><circle cx="82" cy="248" r="2.5" fill="#e6fafb" opacity=".7"/><circle cx="66" cy="256" r="2" fill="#e6fafb" opacity=".6"/></g>' +
+    '<path d="' + BASE + '" fill="url(#gGlass)" stroke="#a9dfe2" stroke-width="1.6"/>' +
+    '<path d="M40 198 Q34 222 40 250" stroke="rgba(255,255,255,.75)" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+    // brass stem with rings
+    '<rect x="63" y="80" width="14" height="92" fill="url(#gBrass)" stroke="#5a3c0c" stroke-width="1"/>' +
+    '<ellipse cx="70" cy="106" rx="13" ry="4.5" fill="url(#gBrass)" stroke="#5a3c0c" stroke-width=".8"/><ellipse cx="70" cy="140" rx="12" ry="4" fill="url(#gBrass)" stroke="#5a3c0c" stroke-width=".8"/>' +
+    '<ellipse cx="70" cy="168" rx="16" ry="5" fill="url(#gBrass)" stroke="#5a3c0c" stroke-width=".8"/>' +
+    // steel tray
+    '<ellipse cx="70" cy="82" rx="46" ry="9" fill="url(#gSteel)" stroke="#4c535a" stroke-width="1.2"/><ellipse cx="70" cy="80" rx="40" ry="6" fill="rgba(255,255,255,.22)"/>' +
+    // clay bowl with foil
+    '<path d="M46 44 Q70 37 94 44 L87 78 Q70 83 53 78Z" fill="url(#gClayS)" stroke="#3a1606" stroke-width="1.6"/>' +
+    '<path d="M46 44 Q70 37 94 44 L87 78 Q70 83 53 78Z" fill="#000" filter="url(#fGrain)" opacity=".5"/>' +
+    '<ellipse cx="70" cy="43" rx="25" ry="6.5" fill="url(#gFoilR)" stroke="#7b838c" stroke-width="1.2"/>' + cl +
     '</svg>';
 }
 
 function sideSVG(color) {
-  return '<svg viewBox="0 0 220 240" class="sideSvg" aria-hidden="true">' +
-    '<defs><clipPath id="bowlClip"><path d="M52 58 L168 58 L150 184 Q110 195 70 184 Z"/></clipPath></defs>' +
-    '<rect x="98" y="196" width="24" height="34" fill="#c99a3a" stroke="#6a4a12" stroke-width="2"/>' +
-    '<path d="M38 48 L182 48 L162 192 Q110 208 58 192 Z" fill="url(#gClay)" stroke="#5a2a14" stroke-width="4"/>' +
-    '<path d="M52 58 L168 58 L150 184 Q110 195 70 184 Z" fill="#21100a"/>' +
+  // cut-away Egyptian clay bowl sitting on the tray and stem; interior x 52..168, y 58..190 (fill math unchanged)
+  return '<svg viewBox="18 30 200 212" class="sideSvg" aria-hidden="true">' +
+    '<defs><clipPath id="bowlClip"><path d="M52 58 L168 58 L150 184 Q110 195 70 184 Z"/></clipPath>' +
+    '<clipPath id="wallClip"><path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z"/></clipPath></defs>' +
+    // stem + tray + top of the glass
+    '<path d="M44 300 Q40 286 70 280 L150 280 Q180 286 176 300 Z" fill="url(#gGlass)" stroke="rgba(200,240,242,.5)"/>' +
+    '<rect x="100" y="206" width="20" height="80" fill="url(#gBrass)"/>' +
+    '<ellipse cx="110" cy="250" rx="13" ry="4" fill="url(#gBrass)"/><ellipse cx="110" cy="268" rx="11" ry="3.5" fill="url(#gBrass)"/>' +
+    '<ellipse cx="110" cy="226" rx="78" ry="11" fill="url(#gSteel)" stroke="#4c535a"/><ellipse cx="110" cy="223" rx="72" ry="8" fill="rgba(255,255,255,.18)"/>' +
+    '<rect x="96" y="196" width="28" height="24" rx="4" fill="url(#gClayS)"/>' +
+    // bowl wall (outer), with grain
+    '<path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z" fill="url(#gClayS)" stroke="#3a1606" stroke-width="2"/>' +
+    '<path d="M30 46 L190 46 L166 196 Q110 214 54 196 Z" fill="#000" filter="url(#fGrain)" opacity=".55"/>' +
+    // cut face of the wall (lighter terracotta)
+    '<path d="M38 50 L52 58 L70 184 Q110 195 150 184 L168 58 L182 50 L162 192 Q110 208 58 192 Z" fill="url(#gClayCut)" opacity=".55"/>' +
+    // interior + bottom holes
+    '<path d="M52 58 L168 58 L150 184 Q110 195 70 184 Z" fill="#170a05"/>' +
     '<g clip-path="url(#bowlClip)">' +
       '<rect id="packRect" x="40" y="200" width="140" height="0" fill="' + color + '"/>' +
-      '<ellipse id="packTop" cx="110" cy="200" rx="60" ry="6" fill="' + color + '" style="filter:brightness(1.25)"/>' +
-      '<rect x="40" y="71.2" width="140" height="21.1" fill="rgba(95,208,122,.28)" stroke="#5fd07a" stroke-width="2" stroke-dasharray="6 4"/>' +
+      '<rect x="40" y="40" width="140" height="160" fill="#000" filter="url(#fTob)" opacity=".7" style="pointer-events:none"/>' +
+      '<ellipse id="packTop" cx="110" cy="200" rx="60" ry="6" fill="' + color + '" style="filter:brightness(1.3)"/>' +
+      '<rect x="40" y="71.2" width="140" height="21.1" fill="rgba(95,208,122,.24)" stroke="#5fd07a" stroke-width="2" stroke-dasharray="6 4"/>' +
     '</g>' +
-    '<rect x="32" y="42" width="156" height="10" rx="5" fill="#8a3f1e" stroke="#4a210f" stroke-width="2"/>' +
-    '<rect x="196" y="71.2" width="10" height="21.1" rx="3" fill="#5fd07a"/>' +
-    '<path id="curMark" d="M212 200 L198 194 L198 206Z" fill="#ffd27a"/>' +
+    '<g fill="#050302"><ellipse cx="96" cy="188" rx="4" ry="2"/><ellipse cx="110" cy="190" rx="4" ry="2"/><ellipse cx="124" cy="188" rx="4" ry="2"/></g>' +
+    // glazed rim with a highlight
+    '<path d="M26 42 Q110 34 194 42 L192 52 Q110 44 28 52 Z" fill="url(#gClayS)" stroke="#3a1606" stroke-width="2"/>' +
+    '<path d="M40 44 Q110 38 180 44" stroke="rgba(255,236,210,.55)" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    '<path d="M44 70 L58 182" stroke="rgba(255,225,190,.25)" stroke-width="5" stroke-linecap="round"/>' +
+    '<rect x="198" y="71.2" width="10" height="21.1" rx="3" fill="#5fd07a"/>' +
+    '<path id="curMark" d="M214 200 L200 194 L200 206Z" fill="#ffd27a"/>' +
     '</svg>';
+}
+
+function holePath(cx, cy, k) {   // torn foil petals around a big hole
+  let d = '';
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2 + k, r = (i % 2 ? 12.5 : 17) + ((i * 7 + k * 3) % 3); d += (i ? 'L' : 'M') + (cx + Math.cos(a) * r).toFixed(1) + ' ' + (cy + Math.sin(a) * r).toFixed(1); }
+  return d + 'Z';
+}
+function lumpPath(cx, cy, r, seed) {   // an irregular charcoal lump
+  let d = '';
+  for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2 + seed, rr = r * (0.82 + 0.22 * Math.abs(Math.sin(seed * 3.1 + i * 2.3))); d += (i ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(1) + ' ' + (cy + Math.sin(a) * rr * 0.9).toFixed(1); }
+  return d + 'Z';
 }
 
 function topSVG(showTargets) {
   let slots = '';
   HOLES.forEach((p, k) => {
     slots += '<g class="slot" data-k="' + k + '">' +
-      '<g class="hole"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#2c3238"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="8.5" fill="none" stroke="#f2f5f7" stroke-opacity=".75" stroke-width="1.5"/></g>' +
-      (showTargets ? '<g class="dot" data-dot="' + k + '"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="28" fill="transparent"/><circle class="ring" cx="' + p[0] + '" cy="' + p[1] + '" r="10"/></g>' : '') +
+      '<g class="hole"><path d="' + holePath(p[0], p[1], k) + '" fill="#e6eaee" stroke="#8d969f" stroke-width="1.2"/>' +
+      '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="11.5" fill="url(#gHole)"/><path d="M' + (p[0] - 8) + ' ' + (p[1] - 6) + ' A11 11 0 0 1 ' + (p[0] + 7) + ' ' + (p[1] - 8) + '" stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none"/></g>' +
+      (showTargets ? '<g class="dot" data-dot="' + k + '"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="36" fill="transparent"/><circle class="ring" cx="' + p[0] + '" cy="' + p[1] + '" r="17"/></g>' : '') +
       '</g>';
   });
+  // crumpled foil edge folded over the rim
+  let edge = '';
+  for (let i = 0; i < 40; i++) { const a = i / 40 * Math.PI * 2, r = 96 + ((i * 37) % 7); edge += (i ? 'L' : 'M') + (110 + Math.cos(a) * r).toFixed(1) + ' ' + (110 + Math.sin(a) * r).toFixed(1); }
   return '<svg viewBox="0 0 220 220" class="topSvg" aria-hidden="true">' +
-    '<circle cx="110" cy="110" r="106" fill="url(#gClay)" stroke="#4a210f" stroke-width="4"/>' +
-    '<circle cx="110" cy="110" r="92" fill="url(#gFoil)" stroke="#8a929b" stroke-width="2"/>' +
-    '<path d="M40 74 L72 58 L90 84 L58 104Z" fill="rgba(255,255,255,.28)"/><path d="M150 132 L178 118 L170 152 L146 160Z" fill="rgba(0,0,0,.08)"/>' +
-    '<path d="M60 150 L96 138 M120 50 L142 78 M52 120 L84 126" stroke="rgba(0,0,0,.13)" stroke-width="2" fill="none"/>' +
+    '<circle cx="112" cy="116" r="106" fill="#000" opacity=".35" filter="url(#fSoft)"/>' +
+    '<circle cx="110" cy="110" r="107" fill="url(#gClayT)" stroke="#3a1606" stroke-width="3"/>' +
+    '<circle cx="110" cy="110" r="107" fill="#000" filter="url(#fGrain)" opacity=".5"/>' +
+    '<path d="M30 70 A88 88 0 0 1 120 14" stroke="rgba(255,236,210,.45)" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+    '<path d="' + edge + 'Z" fill="#b9c0c7" stroke="#7d868f" stroke-width="1.2"/>' +
+    '<circle cx="110" cy="110" r="93" fill="url(#gFoilR)"/>' +
+    '<circle cx="110" cy="110" r="93" fill="#fff" filter="url(#fCrinkle)" style="mix-blend-mode:multiply" opacity=".75"/>' +
+    '<ellipse cx="82" cy="78" rx="34" ry="20" fill="rgba(255,255,255,.45)" transform="rotate(-30 82 78)" filter="url(#fSoft)"/>' +
+    '<circle cx="110" cy="110" r="93" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="3"/>' +
     slots + '<g id="placed"></g></svg>';
 }
 
@@ -3297,13 +3357,13 @@ function renderStage() {
   } else if (station.step === 2) {
     const c = seats[station.seat];
     h = '<div class="holdzone" data-hold="1">' + sideSVG(FL[c.flavor].c) + '<div id="packMsg" class="pill"></div>' +
-      '<p class="hint">دوس وامسك، وسيب لما المعسّل يوصل للمنطقة الخضرا</p></div>';
+      '<p class="hint">امسك، وسيب لما المعسّل يوصل للأخضر</p></div>';
   } else if (station.step === 3) {
     h = topSVG(true) + '<p class="hint">خرّم القصدير: دوس على النقط</p>';
   } else if (station.step === 4) {
     h = topSVG(false) + '<div class="tray">' + coals.map((c, k) =>
       '<div class="cw"><button class="coal" type="button" data-coal="' + k + '" data-s="' + coalState(c.h) + '"></button><div class="hbar"><u></u><i></i></div></div>').join('') +
-      '</div><p class="hint">لمّا الفحمة تحمرّ دوس عليها تتحط على الحجر</p>';
+      '</div><p class="hint">لمّا الفحمة تحمرّ دوس عليها</p>';
   }
   stageEl.innerHTML = h;
 
@@ -3404,10 +3464,19 @@ function drawPlaced(state, n, animate) {
     glow.setAttribute('fill', 'rgba(255,107,44,.35)');
     g.appendChild(glow);
   }
-  const d = document.createElementNS(SVGNS, 'circle');
-  d.setAttribute('cx', pos[0]); d.setAttribute('cy', pos[1]); d.setAttribute('r', 28);
+  const d = document.createElementNS(SVGNS, 'path');
+  d.setAttribute('d', lumpPath(pos[0], pos[1], 29, n * 1.7 + 0.4));
   d.setAttribute('fill', 'url(#' + fill + ')'); d.setAttribute('stroke', '#1a0f0a'); d.setAttribute('stroke-width', 2);
   g.appendChild(d);
+  const tx = document.createElementNS(SVGNS, 'path');
+  tx.setAttribute('d', lumpPath(pos[0], pos[1], 29, n * 1.7 + 0.4)); tx.setAttribute('fill', '#000'); tx.setAttribute('filter', 'url(#fGrain)'); tx.setAttribute('opacity', state === 'burnt' ? '.35' : '.7');
+  g.appendChild(tx);
+  if (state === 'ready') {   // glowing cracks
+    const cr = document.createElementNS(SVGNS, 'path');
+    cr.setAttribute('d', 'M' + (pos[0] - 14) + ' ' + (pos[1] - 4) + ' L' + (pos[0] - 2) + ' ' + (pos[1] + 2) + ' L' + (pos[0] + 6) + ' ' + (pos[1] - 9) + ' M' + (pos[0] - 2) + ' ' + (pos[1] + 2) + ' L' + (pos[0] + 3) + ' ' + (pos[1] + 14));
+    cr.setAttribute('stroke', '#ffd27a'); cr.setAttribute('stroke-width', 1.6); cr.setAttribute('fill', 'none'); cr.setAttribute('opacity', '.85');
+    g.appendChild(cr);
+  }
   refs.placed.appendChild(g);
 }
 function takeCoal(k) {
